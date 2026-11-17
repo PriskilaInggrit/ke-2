@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SMART SHOP - Toko Online</title>
+
+<style>
+
+/* =========================
+   1. CSS DASAR
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f4f6f9;
+    color: #222;
+}
+
+/* =========================
+   2. HEADER DAN LOGO
+========================= */
+
+header {
+    background: #102a43;
+    color: white;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    background: #ff9f1c;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logo h2 {
+    font-size: 24px;
+}
+
+.logo span {
+    color: #ff9f1c;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff9f1c;
+}
+
+/* =========================
+   3. BANNER PROMOSI
+========================= */
+
+.banner {
+    min-height: 420px;
+
+    background:
+    linear-gradient(
+        rgba(0, 25, 50, 0.75),
+        rgba(0, 25, 50, 0.35)
+    ),
+    url("https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1600")
+    center/cover;
+
+    display: flex;
+    align-items: center;
+    padding: 50px 8%;
+    color: white;
+}
+
+.banner-content {
+    max-width: 550px;
+}
+
+.banner h1 {
+    font-size: 43px;
+    margin-bottom: 20px;
+}
+
+.banner p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.tombol {
+    display: inline-block;
+    background: #ff9f1c;
+    color: white;
+    padding: 14px 25px;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.tombol:hover {
+    background: #e68a00;
+}
+
+/* =========================
+   4. KATEGORI ELEKTRONIK
+========================= */
+
+.kategori {
+    padding: 60px 8%;
+    text-align: center;
+}
+
+.judul {
+    font-size: 30px;
+    color: #102a43;
+    margin-bottom: 15px;
+}
+
+.kategori-card {
+    background: white;
+    max-width: 230px;
+    margin: 25px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.kategori-card .icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.kategori-card h3 {
+    color: #102a43;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   5. DAFTAR PRODUK
+========================= */
+
+.produk {
+    background: #eaf0f6;
+    padding: 60px 8%;
+    text-align: center;
+}
+
+.subtitle {
+    color: #777;
+    margin-bottom: 35px;
+}
+
+.produk-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.produk-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.produk-card:hover {
+    transform: translateY(-7px);
+}
+
+.produk-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.produk-info {
+    padding: 20px;
+}
+
+.produk-info h3 {
+    color: #102a43;
+    margin-bottom: 12px;
+}
+
+.produk-info p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.harga {
+    font-size: 20px;
+    color: #e68a00;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.detail-btn {
+    background: #102a43;
+    color: white;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.detail-btn:hover {
+    background: #ff9f1c;
+}
+
+/* =========================
+   6. MODAL DETAIL PRODUK
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-content img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-content h2 {
+    margin-bottom: 12px;
+    color: #102a43;
+}
+
+.modal-content h3 {
+    color: #e68a00;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    line-height: 1.7;
+    color: #555;
+}
+
+.close {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    border: none;
+    background: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* =========================
+   7. FOOTER
+========================= */
+
+footer {
+    background: #102a43;
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+    line-height: 2;
+}
+
+/* =========================
+   8. RESPONSIVE HP
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .banner h1 {
+        font-size: 30px;
+    }
+
+    .produk-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+
+    .produk-container {
+        grid-template-columns: 1fr;
+    }
+
+    .banner {
+        min-height: 350px;
+    }
+
+    .banner h1 {
+        font-size: 27px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER DAN LOGO
+========================= -->
+
+<header>
+
+    <div class="logo">
+        <div class="logo-icon">S</div>
+
+        <h2>SMART <span>SHOP</span></h2>
+    </div>
+
+    <nav>
+        <a href="#home">Beranda</a>
+        <a href="#kategori">Kategori</a>
+        <a href="#produk">Produk</a>
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     BANNER PROMOSI
+========================= -->
+
+<section class="banner" id="home">
+
+    <div class="banner-content">
+
+        <h1>
+            Selamat Datang di SMART SHOP
+        </h1>
+
+        <p>
+            Temukan berbagai produk elektronik
+            berkualitas dengan harga terbaik.
+            Belanja lebih mudah, cepat, dan nyaman.
+        </p>
+
+        <a href="#produk" class="tombol">
+            Belanja Sekarang
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     KATEGORI PRODUK
+========================= -->
+
+<section class="kategori" id="kategori">
+
+    <h2 class="judul">Kategori Produk</h2>
+
+    <div class="kategori-card">
+
+        <div class="icon">📱</div>
+
+        <h3>Elektronik</h3>
+
+        <p>
+            Berbagai pilihan perangkat
+            elektronik untuk kebutuhan Anda.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DAFTAR PRODUK
+========================= -->
+
+<section class="produk" id="produk">
+
+    <h2 class="judul">Produk Elektronik</h2>
+
+    <p class="subtitle">
+        Pilihan produk terbaik SMART SHOP
+    </p>
+
+    <div class="produk-container" id="produkContainer">
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MODAL DETAIL PRODUK
+========================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="tutupDetail()">
+            &times;
+        </button>
+
+        <img id="detailFoto" src="" alt="Foto produk">
+
+        <h2 id="detailNama"></h2>
+
+        <h3 id="detailHarga"></h3>
+
+        <p id="detailDeskripsi"></p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>SMART SHOP</h3>
+
+    <p>Toko Online Elektronik Pilihan Anda</p>
+
+    <p>
+        &copy; SMKN 1 LUWU UTARA --
+        Teknik Komputer Dan Jaringan.
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+// DATA PRODUK ELEKTRONIK
+
+const daftarProduk = [
+
+    {
+        nama: "Laptop ASUS VivoBook",
+
+        harga: "Rp7.500.000",
+
+        foto: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=700",
+
+        deskripsi: "Laptop ASUS VivoBook merupakan komputer portabel dengan desain modern. Perangkat ini cocok digunakan untuk kegiatan belajar, pekerjaan kantor, mengolah dokumen, mengakses internet, dan aktivitas sehari-hari."
+    },
+
+    {
+        nama: "Smartphone Samsung",
+
+        harga: "Rp3.500.000",
+
+        foto: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=700",
+
+        deskripsi: "Smartphone Samsung merupakan perangkat komunikasi modern yang dilengkapi layar digital, kamera, konektivitas internet, serta berbagai aplikasi untuk mendukung kebutuhan komunikasi dan hiburan."
+    },
+
+    {
+        nama: "Headphone Wireless",
+
+        harga: "Rp450.000",
+
+        foto: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700",
+
+        deskripsi: "Headphone wireless adalah perangkat audio tanpa kabel yang dapat dihubungkan dengan smartphone, laptop, atau perangkat lainnya. Cocok untuk mendengarkan musik, belajar, dan mengikuti pertemuan online."
+    },
+
+    {
+        nama: "Kamera Digital",
+
+        harga: "Rp5.200.000",
+
+        foto: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=700",
+
+        deskripsi: "Kamera digital digunakan untuk mengambil foto dan merekam video. Perangkat ini cocok untuk dokumentasi kegiatan, fotografi, pembuatan konten, dan kebutuhan pekerjaan kreatif."
+    },
+
+    {
+        nama: "Smartwatch",
+
+        harga: "Rp850.000",
+
+        foto: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700",
+
+        deskripsi: "Smartwatch merupakan jam tangan pintar yang memiliki berbagai fitur digital seperti notifikasi pesan, penunjuk waktu, pemantauan aktivitas, dan konektivitas dengan smartphone."
+    },
+
+    {
+        nama: "Speaker Bluetooth",
+
+        harga: "Rp350.000",
+
+        foto: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=700",
+
+        deskripsi: "Speaker Bluetooth merupakan perangkat audio nirkabel yang dapat terhubung dengan smartphone, laptop, dan perangkat lainnya. Digunakan untuk mendengarkan musik dan berbagai kebutuhan audio."
+    }
+
+];
+
+
+// MENAMPILKAN PRODUK KE WEBSITE
+
+const container = document.getElementById("produkContainer");
+
+daftarProduk.forEach((produk, index) => {
+
+    container.innerHTML += `
+
+        <div class="produk-card">
+
+            <img
+                src="${produk.foto}"
+                alt="${produk.nama}"
+                loading="lazy"
+            >
+
+            <div class="produk-info">
+
+                <h3>${produk.nama}</h3>
+
+                <p>
+                    ${produk.deskripsi.substring(0, 90)}...
+                </p>
+
+                <div class="harga">
+                    ${produk.harga}
+                </div>
+
+                <button
+                    class="detail-btn"
+                    onclick="lihatDetail(${index})"
+                >
+                    Lihat Detail
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+});
+
+
+// FUNGSI MELIHAT DETAIL PRODUK
+
+function lihatDetail(index) {
+
+    const produk = daftarProduk[index];
+
+    document.getElementById("detailFoto").src =
+        produk.foto;
+
+    document.getElementById("detailNama").textContent =
+        produk.nama;
+
+    document.getElementById("detailHarga").textContent =
+        produk.harga;
+
+    document.getElementById("detailDeskripsi").textContent =
+        produk.deskripsi;
+
+    document.getElementById("modal").style.display = "flex";
+
+}
+
+
+// FUNGSI MENUTUP DETAIL PRODUK
+
+function tutupDetail() {
+
+    document.getElementById("modal").style.display = "none";
+
+}
+
+
+// MENUTUP MODAL DENGAN KLIK DI LUAR KOTAK
+
+document.getElementById("modal").addEventListener("click", function(event) {
+
+    if (event.target === this) {
+
+        tutupDetail();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
